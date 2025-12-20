@@ -48,7 +48,7 @@ pipeline {
         stage("OWASP: Dependency check"){
             steps{
                 script{
-                    owasp_dependency()
+                    owasp_dep()
                 }
             }
         }
@@ -56,7 +56,7 @@ pipeline {
         stage("SonarQube: Code Analysis"){
             steps{
                 script{
-                    sonarqube_analysis("Sonar","wanderlust","wanderlust")
+                    SQ_analysis("Sonar","wanderlust","wanderlust")
                 }
             }
         }
@@ -64,7 +64,7 @@ pipeline {
         stage("SonarQube: Code Quality Gates"){
             steps{
                 script{
-                    sonarqube_code_quality()
+                    SQ_code_quality()
                 }
             }
         }
