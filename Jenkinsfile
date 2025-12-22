@@ -1,6 +1,10 @@
 @Library('Sharedlib') _
 pipeline {
     agent any
+
+    tools {
+        nodejs "node18"
+    }    
     
     environment{
         SONAR_HOME = tool "Sonar"
@@ -25,6 +29,14 @@ pipeline {
             steps{
                 script{
                     cleanWs()
+                }
+            }
+        }
+
+        stage('Verify NodeJS') {
+            steps {
+                script {
+                    verify_node()
                 }
             }
         }
