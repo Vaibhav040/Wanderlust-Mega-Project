@@ -8,6 +8,7 @@ import authRouter from './routes/auth.js';
 import postsRouter from './routes/posts.js';
 import { connectToRedis } from './services/redis.js';
 const app = express();
+app.disable('x-powered-by'); // disable Express fingerprinting
 const port = PORT || 5000;
 
 app.use(express.json());
