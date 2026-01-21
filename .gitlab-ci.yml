@@ -51,7 +51,7 @@ sonarqube_analysis:
     - sonar-scanner
       -Dsonar.host.url=$SONAR_HOST_URL
       -Dsonar.login=$SONAR_TOKEN
-  alloe_failure: true
+  allow_failure: true
 
 build_image:
   extends: .docker_setup
