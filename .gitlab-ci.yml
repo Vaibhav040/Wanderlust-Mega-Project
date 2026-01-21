@@ -81,7 +81,7 @@ push_images:
 trigger_cd:
   stage: trigger-cd
   trigger:
-    project: GitOps/
+    project: wanderlust-mega-project/GitOps/
     forward:
       pipeline_variables: true
 
