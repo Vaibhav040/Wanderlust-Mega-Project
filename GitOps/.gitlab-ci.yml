@@ -1,0 +1,35 @@
+stages:
+  - verify
+  - update
+  - notify
+
+variables:
+  FRONTEND_DOCKER_TAG: ""
+  BACKEND_DOCKER_TAG: ""
+
+verify_tags:
+  stage: verify
+    - echo "FRONTEND_TAG Recived: $FRONTEND_DOCKER_TAG"
+    - echo "BACKEND_TAG Recived: $BACKEND_DOCKER_TAG"
+    - if [ -z "$FRONTEND_DOCKER_TAG" ] || [ -z "$BACKEND_DOCKER_TAG" ]; then exit 1; fi
+
+update_manifests:
+  stage: update
+  image: alpine:latest
+  before_scriptL:
+    - apk add --no-cache git sed
+    - git config --global user.email "${GIT_USER_EMAIL}"
+    - git config --global user.name "${GIT_USER_NAME}"
+
+  script:
+    # File Update
+    - sed -i "s/wanderlust-backend-beta:.*/wanderlust-backend-beta:${BACKEND_DOCKER_TAG}/g" kubernetes/backend.yaml
+    - sed -i "s/wanderlust-frontend-beta:.*/wanderlust-frontend-beta:${FRONTEND_DOCKER_TAG}/g" kubernetes/frontend.yaml
+
+    # Set Origin URL
+    - git remote set-url origin "https://oauth2:${GL_PAT}@gitlab.com/${CI_PROJECT_PATH}.git"
+
+    # Commit and Push
+    - git add .
+    - git commit -m "Updated image tags in frontend and backend with $BACKEND_DOCKER_TAG in k8s"
+    - git push origin HEAD:main
