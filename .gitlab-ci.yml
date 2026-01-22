@@ -67,8 +67,8 @@ build_image:
     - docker build -t $DOCKER_USER/wanderlust-frontend-beta:$FRONTEND_DOCKER_TAG ./frontend
 
     # Save image to file so that Push job can use them
-    - docker save $DOCKER_USER/wanderlust-backend-beta:$BACKEND_DOCKER_TAG ./backend > backend_image.tar
-    - docker save $DOCKER_USER/wanderlust-frontend-beta:$FRONTEND_DOCKER_TAG ./frontend > frontend_image.tar
+    - docker save $DOCKER_USER/wanderlust-backend-beta:$BACKEND_DOCKER_TAG > backend_image.tar
+    - docker save $DOCKER_USER/wanderlust-frontend-beta:$FRONTEND_DOCKER_TAG > frontend_image.tar
   artifacts:
     paths:
       - backend_image.tar
