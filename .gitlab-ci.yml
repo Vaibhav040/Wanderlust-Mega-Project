@@ -25,6 +25,7 @@ workflow:
   services:
     - docker:24.0.5-dind
   before_script:
+    - git add --no-cache bash
     - echo "$DOCKER_PASSWORD" || docker login -u "$DOCKER_USER" --password-stdin
 
 trivy_filesystem:
