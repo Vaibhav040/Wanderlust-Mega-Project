@@ -74,6 +74,8 @@ build_image:
       - backend_image.tar
       - frontend_image.tar
     expire_in: 1 hour
+  tags:
+    - dev
 
 push_images:
   extends: .docker_setup
