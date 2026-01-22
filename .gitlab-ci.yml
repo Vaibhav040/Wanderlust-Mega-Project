@@ -86,8 +86,8 @@ push_images:
     - docker load < frontend_image.tar
 
     # Push the image
-    - docker push $DOCKER_USER/wanderlust-backend-beta:$BACKEND_DOCKER_TAG ./backend
-    - docker push $DOCKER_USER/wanderlust-frontend-beta:$FRONTEND_DOCKER_TAG ./frontend
+    - docker push $DOCKER_USER/wanderlust-backend-beta:$BACKEND_DOCKER_TAG
+    - docker push $DOCKER_USER/wanderlust-frontend-beta:$FRONTEND_DOCKER_TAG
 
 trigger_cd:
   stage: trigger-cd
