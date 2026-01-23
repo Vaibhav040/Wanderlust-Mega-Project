@@ -9,6 +9,7 @@ variables:
 
 verify_tags:
   stage: verify
+  script:
     - echo "FRONTEND_TAG Recived: $FRONTEND_DOCKER_TAG"
     - echo "BACKEND_TAG Recived: $BACKEND_DOCKER_TAG"
     - if [ -z "$FRONTEND_DOCKER_TAG" ] || [ -z "$BACKEND_DOCKER_TAG" ]; then exit 1; fi
@@ -16,7 +17,7 @@ verify_tags:
 update_manifests:
   stage: update
   image: alpine:latest
-  before_scriptL:
+  before_script:
     - apk add --no-cache git sed
     - git config --global user.email "${GIT_USER_EMAIL}"
     - git config --global user.name "${GIT_USER_NAME}"
