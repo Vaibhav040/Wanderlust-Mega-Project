@@ -99,6 +99,7 @@ push_images:
       else
         echo "Pushing Frontend image to Registry"
         docker push $DOCKER_USER/wanderlust-frontend-beta:$FRONTEND_DOCKER_TAG
+      fi
 
 trigger_cd:
   stage: trigger-cd
