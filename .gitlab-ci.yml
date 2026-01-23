@@ -104,7 +104,8 @@ push_images:
 trigger_cd:
   stage: trigger-cd
   trigger:
-    project: GitOps/.gitlab-ci.yml
+    include: GitOps/.gitlab-ci.yml
+    strategy: depend
     forward:
       pipeline_variables: true
 
