@@ -1,11 +1,6 @@
 stages:
   - verify
   - update
-  - notify
-
-variables:
-  FRONTEND_DOCKER_TAG: ""
-  BACKEND_DOCKER_TAG: ""
 
 verify_tags:
   stage: verify
