@@ -14,8 +14,8 @@ verify_tags:
     - echo "FRONTEND_TAG Recived: $FRONTEND_DOCKER_TAG"
     - echo "BACKEND_TAG Recived: $BACKEND_DOCKER_TAG"
     - |
-        [-n "$FRONTEND_DOCKER_TAG"] || {echo "Missing FRONTEND_DOCKER_TAG"; exit 1; }
-        [-n "$BACKEND_DOCKER_TAG"] || {echo "Missing BACKEND_DOCKER_TAG"; exit 1; } 
+        [ -n "$FRONTEND_DOCKER_TAG" ] || { echo "Missing FRONTEND_DOCKER_TAG"; exit 1; }
+        [ -n "$BACKEND_DOCKER_TAG" ] || { echo "Missing BACKEND_DOCKER_TAG"; exit 1; } 
 
 update_manifests:
   stage: update
