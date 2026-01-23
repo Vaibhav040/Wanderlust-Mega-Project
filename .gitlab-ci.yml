@@ -85,14 +85,25 @@ push_images:
     - docker load < backend_image.tar
     - docker load < frontend_image.tar
 
-    # Push the image
-    - docker push $DOCKER_USER/wanderlust-backend-beta:$BACKEND_DOCKER_TAG
-    - docker push $DOCKER_USER/wanderlust-frontend-beta:$FRONTEND_DOCKER_TAG
+    # Push the image for backend
+    - |
+      if docker manifest inspect $DOCKER_USER/wanderlust-backend-beta:$BACKEND_DOCKER_TAG > /dev/null  2>&1; then
+        echo "Backend image already exists, Skinping the push"
+      else
+        echo "Pusing Backend image to Registry"
+        docker push $DOCKER_USER/wanderlust-backend-beta:$BACKEND_DOCKER_TAG
+      fi
+    - |
+      if docker manifest inspect $DOCKER_USER/wanderlust-frontend-beta:$FRONTEND_DOCKER_TAG > /dev/null 2>&1; then
+        echo "Frontend image already exists, Skiping the push"
+      else
+        echo "Pushing Frontend image to Registry"
+        docker push $DOCKER_USER/wanderlust-frontend-beta:$FRONTEND_DOCKER_TAG
 
 trigger_cd:
   stage: trigger-cd
   trigger:
-    project: wanderlust-mega-project/GitOps/
+    project: wanderlust-mega-project/GitOps
     forward:
       pipeline_variables: true
 
