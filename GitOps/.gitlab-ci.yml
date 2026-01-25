@@ -7,11 +7,7 @@ verify_tags:
   script:
     - echo "FRONTEND_TAG Recived: $FRONTEND_DOCKER_TAG"
     - echo "BACKEND_TAG Recived: $BACKEND_DOCKER_TAG"
-    - |
-      if [ -z "$FRONTEND_DOCKER_TAG" ] || [ -z "$BACKEND_DOCKER_TAG" ]; then
-        echo "One or more required tags are missing"
-        exit 1
-      fi 
+    - if [ -z "$FRONTEND_DOCKER_TAG" ] || [ -z "$BACKEND_DOCKER_TAG" ]; then echo "Tags missing"; exit 1; fi 
 
 update_manifests:
   stage: update
